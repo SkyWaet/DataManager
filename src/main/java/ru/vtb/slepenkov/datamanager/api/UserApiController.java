@@ -1,5 +1,6 @@
 package ru.vtb.slepenkov.datamanager.api;
 
+import ru.vtb.slepenkov.datamanager.exceptions.NotFoundException;
 import ru.vtb.slepenkov.datamanager.model.SimpleUser;
 import ru.vtb.slepenkov.datamanager.model.UserWithDescription;
 import ru.vtb.slepenkov.datamanager.service.UserServiceImpl;
@@ -40,23 +41,15 @@ public class UserApiController implements UserApi {
     public ResponseEntity<Void> userUserIdDelete(@Min(0L) @Parameter(in = ParameterIn.PATH, description = "unique id of desired user", required = true, schema = @Schema(allowableValues = {}
     )) @PathVariable("userId") Long userId) {
         String accept = request.getHeader("Accept");
-        try {
-            service.delete(userId);
-            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-        } catch (NotFoundException e) {
-            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-        }
+        service.delete(userId);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 
     public ResponseEntity<UserWithDescription> userUserIdGet(@Min(0L) @Parameter(in = ParameterIn.PATH, description = "unique id of desired user", required = true, schema = @Schema(allowableValues = {}
     )) @PathVariable("userId") Long userId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<UserWithDescription>(service.findById(userId), HttpStatus.OK);
-            } catch (ChangeSetPersister.NotFoundException e) {
-                return new ResponseEntity<UserWithDescription>(HttpStatus.NOT_FOUND);
-            }
+            return new ResponseEntity<UserWithDescription>(service.findById(userId), HttpStatus.OK);
         }
 
         return new ResponseEntity<UserWithDescription>(HttpStatus.NOT_IMPLEMENTED);
@@ -66,11 +59,7 @@ public class UserApiController implements UserApi {
     )) @PathVariable("userId") Long userId, @Parameter(in = ParameterIn.DEFAULT, description = "A JSON object containing new user data", required = true, schema = @Schema()) @Valid @RequestBody SimpleUser body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<UserWithDescription>(service.update(userId, body), HttpStatus.OK);
-            } catch (ChangeSetPersister.NotFoundException e) {
-                return new ResponseEntity<UserWithDescription>(HttpStatus.NOT_FOUND);
-            }
+            return new ResponseEntity<UserWithDescription>(service.update(userId, body), HttpStatus.OK);
         }
 
         return new ResponseEntity<UserWithDescription>(HttpStatus.NOT_IMPLEMENTED);

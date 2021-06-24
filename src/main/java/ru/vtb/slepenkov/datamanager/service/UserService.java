@@ -1,8 +1,8 @@
 package ru.vtb.slepenkov.datamanager.service;
 
 
-import ru.vtb.slepenkov.datamanager.api.ApiException;
-import ru.vtb.slepenkov.datamanager.api.NotFoundException;
+import ru.vtb.slepenkov.datamanager.exceptions.ApiException;
+import ru.vtb.slepenkov.datamanager.exceptions.NotFoundException;
 import ru.vtb.slepenkov.datamanager.model.OrderBy;
 import ru.vtb.slepenkov.datamanager.model.SimpleUser;
 import ru.vtb.slepenkov.datamanager.model.UserWithDescription;

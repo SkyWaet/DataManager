@@ -1,7 +1,8 @@
 package ru.vtb.slepenkov.datamanager.service;
 
-import ru.vtb.slepenkov.datamanager.api.ApiException;
-import ru.vtb.slepenkov.datamanager.api.NotFoundException;
+import ru.vtb.slepenkov.datamanager.exceptions.ApiException;
+import ru.vtb.slepenkov.datamanager.exceptions.NoSuchColumnException;
+import ru.vtb.slepenkov.datamanager.exceptions.NotFoundException;
 import ru.vtb.slepenkov.datamanager.converter.UserConverter;
 import ru.vtb.slepenkov.datamanager.model.OrderBy;
 import ru.vtb.slepenkov.datamanager.model.SimpleUser;
@@ -34,15 +35,15 @@ public class UserServiceImpl implements UserService {
     private final String[] columnNames = {"id", "login", "password", "email", "description"};
 
     @Override
-    public List<UserWithId> list(OrderBy orderBy, Integer pageNumber, Integer numElements) throws ApiException {
+    public List<UserWithId> list(OrderBy orderBy, Integer pageNumber, Integer numElements) {
         if (!Arrays.asList(columnNames).contains(orderBy.getColumn())) {
-            throw new ApiException(400, "There is no columns with name " + orderBy.getColumn());
+            throw new NoSuchColumnException(400, "There is no columns with name " + orderBy.getColumn());
         }
         Pageable page;
-        if (orderBy.isAscendant()){
-            page = PageRequest.of(pageNumber,numElements, Sort.by(orderBy.getColumn()).ascending());
+        if (orderBy.isAscendant()) {
+            page = PageRequest.of(pageNumber, numElements, Sort.by(orderBy.getColumn()).ascending());
         } else {
-            page = PageRequest.of(pageNumber,numElements, Sort.by(orderBy.getColumn()).descending());
+            page = PageRequest.of(pageNumber, numElements, Sort.by(orderBy.getColumn()).descending());
         }
         return repository.findAll(page).stream().map(converter::toShortDTO).collect(Collectors.toList());
     }
@@ -53,13 +54,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserWithDescription findById(Long id) throws ChangeSetPersister.NotFoundException {
-        return converter.toDTO(repository.findById(id).orElseThrow(ChangeSetPersister.NotFoundException::new));
+    public UserWithDescription findById(Long id) {
+        return converter.toDTO(repository.findById(id).orElseThrow(
+                () -> new NotFoundException(404, "User with id " + id + " not found.")));
     }
 
     @Override
-    public UserWithDescription update(Long id, SimpleUser user) throws ChangeSetPersister.NotFoundException {
-        User oldUser = repository.findById(id).orElseThrow(ChangeSetPersister.NotFoundException::new);
+    public UserWithDescription update(Long id, SimpleUser user) {
+        User oldUser = repository.findById(id).orElseThrow(
+                () -> new NotFoundException(404, "User with id " + id + " not found."));
         oldUser.setLogin(user.getLogin());
         oldUser.setPassword(user.getPassword());
         oldUser.setEmail(user.getEmail());

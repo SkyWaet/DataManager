@@ -1,5 +1,6 @@
 package ru.vtb.slepenkov.datamanager.api;
 
+import ru.vtb.slepenkov.datamanager.exceptions.ApiException;
 import ru.vtb.slepenkov.datamanager.model.OrderBy;
 import ru.vtb.slepenkov.datamanager.model.SimpleUser;
 import ru.vtb.slepenkov.datamanager.model.UserWithDescription;
@@ -47,14 +48,12 @@ public class UsersApiController implements UsersApi {
             , defaultValue = "20")) @Valid @RequestParam(value = "numElements", required = false, defaultValue = "20") Integer numElements) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
-            try {
-                if (orderBy == null) {
-                    orderBy = new OrderBy();
-                }
-                return new ResponseEntity<List<UserWithId>>(service.list(orderBy, pageIndex, numElements), HttpStatus.OK);
-            } catch (ApiException e) {
-                return new ResponseEntity<List<UserWithId>>(HttpStatus.BAD_REQUEST);
+
+            if (orderBy == null) {
+                orderBy = new OrderBy();
             }
+            return new ResponseEntity<List<UserWithId>>(service.list(orderBy, pageIndex, numElements), HttpStatus.OK);
+
         }
 
         return new ResponseEntity<List<UserWithId>>(HttpStatus.NOT_IMPLEMENTED);

@@ -1,4 +1,6 @@
-package ru.vtb.slepenkov.datamanager.api;
+package ru.vtb.slepenkov.datamanager.exceptions;
+
+import ru.vtb.slepenkov.datamanager.exceptions.ApiException;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-06-22T11:03:20.924Z[GMT]")
 public class NotFoundException extends ApiException {
