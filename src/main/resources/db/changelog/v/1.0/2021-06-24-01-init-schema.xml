@@ -1,0 +1,21 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet author="gslepenkov" id="1">
+        <createTable remarks="Таблица пользователей" tableName="users">
+            <column remarks="ID автоинкремент" autoIncrement="true" name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column remarks="Логин пользователя" name="login" type="character varying">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column remarks="Пароль пользователя" name="password" type="character varying">
+                <constraints nullable="false"/>
+            </column>
+            <column remarks="Email пользователя" name="email" type="character varying"/>
+            <column remarks="Описание пользователя" name="description" type="text"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
