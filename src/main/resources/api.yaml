@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 1.0.1
+  version: 1.0.2
   title: User Data Manager
   description: 'Just an example of CRUD API'
   contact:
@@ -9,33 +9,6 @@ info:
     email: SkyWaet@gmail.com
 components:
   schemas:
-    simpleUser:
-      type: object
-      properties:
-        login:
-          type: string
-          minLength: 6
-          maxLength: 20
-          description: login of the user
-        password:
-          type: string
-          minLength: 8
-          maxLength: 20
-          format: password
-          description: password of the user
-        email:
-          type: string
-          format: email
-          nullable: true
-          description: user email
-        description:
-          type: string
-          nullable: true
-          maxLength: 1536
-      required: 
-        - login
-        - password
-        
     userWithId:
       type: object
       properties:
@@ -54,15 +27,27 @@ components:
           maxLength: 20
           format: password
           description: password of the user
+        name:
+          type: string
+          maxLength: 50
+          description: user name
+        surname:
+          type: string
+          maxLength: 100
+          description: user surname
+        patronymic:
+          type: string
+          maxLength: 100
+          description: user patronymic
         email:
           type: string
           format: email
           nullable: true
           description: user email
-      required: 
+      required:
         - login
         - password
-        
+
     userWithDescription:
       type: object
       properties:
@@ -81,6 +66,18 @@ components:
           maxLength: 20
           format: password
           description: password of the user
+        name:
+          type: string
+          maxLength: 50
+          description: user name
+        surname:
+          type: string
+          maxLength: 100
+          description: user surname
+        patronymic:
+          type: string
+          maxLength: 100
+          description: user patronymic
         email:
           type: string
           format: email
@@ -91,23 +88,31 @@ components:
           nullable: true
           maxLength: 1536
           description: description of user
-      required: 
+      required:
         - login
         - password
 
 
-                  
+
   examples:
     JohnReq:
       value:
+        id: null
         login: john
         password: john123
+        name: John
+        surname: Johnson
+        patronymic: James
         email: john@gmail.com
         description: null
-    MaryReq: 
+    MaryReq:
       value:
+        id: null
         login: mary
         password: mary123
+        name: Mary
+        surname: Smith
+        patronymic: James
         email: null
         description: "Hello, I am Mary. I love coding!"
     JohnRes:
@@ -115,31 +120,37 @@ components:
         id: 0
         login: john
         password: john123
+        name: John
+        surname: Johnson
+        patronymic: James
         email: john@gmail.com
         description: null
-    MaryRes: 
+    MaryRes:
       value:
         id: 1
         login: mary
         password: mary123
+        name: Mary
+        surname: Smith
+        patronymic: James
         email: null
         description: "Hello, I am Mary. I love coding!"
-        
+
   requestBodies:
     userBody:
       required: true
       description: A JSON object containing new user data
       content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/simpleUser'
-            examples:
-              john:
-                $ref: '#/components/examples/JohnReq' 
-              mary:
-                $ref: '#/components/examples/MaryReq' 
-        
-paths: 
+        application/json:
+          schema:
+            $ref: '#/components/schemas/userWithDescription'
+          examples:
+            john:
+              $ref: '#/components/examples/JohnReq'
+            mary:
+              $ref: '#/components/examples/MaryReq'
+
+paths:
   /users:
     get:
       summary: Gets list of users
@@ -147,15 +158,15 @@ paths:
         - in: query
           name: orderBy
           schema:
-              type: object
-              properties:
-                column:
-                  type: string
-                  default: 'id'
-                ascendant: 
-                  type: boolean
-                  default: true
-          description: allows to choose the ranking order 
+            type: object
+            properties:
+              column:
+                type: string
+                default: 'id'
+              ascendant:
+                type: boolean
+                default: true
+          description: allows to choose the ranking order
         - in: query
           name: pageIndex
           schema:
@@ -171,8 +182,8 @@ paths:
             maximum: 100
             default: 20
             description: amount of elements to return
-          
-      
+
+
       responses:
         '200':
           description: Gets an array of users
@@ -192,39 +203,39 @@ paths:
                   password: mary456
                   email: null
     post:
-        summary: Creates new user 
-        requestBody:
-          $ref: '#/components/requestBodies/userBody'
-        
-        responses:
-          '200':
-            description: Returns a copy of created user object
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/userWithDescription'
-                examples:
-                  john:
-                    $ref: '#/components/examples/JohnRes' 
-                  mary:
-                    $ref: '#/components/examples/MaryRes' 
+      summary: Creates new user
+      requestBody:
+        $ref: '#/components/requestBodies/userBody'
+
+      responses:
+        '200':
+          description: Returns a copy of created user object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userWithDescription'
+              examples:
+                john:
+                  $ref: '#/components/examples/JohnRes'
+                mary:
+                  $ref: '#/components/examples/MaryRes'
 
 
 
-                  
+
   /user/{userId}:
-    parameters: 
-        - in: path
-          name: userId
-          description: unique id of desired user 
-          schema:
-              type: integer
-              format: int64
-              minimum: 0
-          required: true
-    get: 
+    parameters:
+      - in: path
+        name: userId
+        description: unique id of desired user
+        schema:
+          type: integer
+          format: int64
+          minimum: 0
+        required: true
+    get:
       summary: Gets a user by ID
-    
+
       responses:
         '200':
           description: Gets the user with the corresponding id
@@ -234,18 +245,18 @@ paths:
                 $ref: '#/components/schemas/userWithDescription'
               examples:
                 john:
-                  $ref: '#/components/examples/JohnRes' 
+                  $ref: '#/components/examples/JohnRes'
                 mary:
-                  $ref: '#/components/examples/MaryRes' 
+                  $ref: '#/components/examples/MaryRes'
 
         '404':
           description: User with requested id not found
-    
+
     put:
       summary: Updates information about user
       requestBody:
         $ref: '#/components/requestBodies/userBody'
-       
+
       responses:
         '200':
           description: Returns a copy of updated user object
@@ -259,7 +270,7 @@ paths:
                 mary:
                   $ref: '#/components/examples/MaryRes'
         '404':
-          description: User with such id does not exist 
+          description: User with such id does not exist
     delete:
       summary: Deletes the user with desired id if it exists
       responses:
