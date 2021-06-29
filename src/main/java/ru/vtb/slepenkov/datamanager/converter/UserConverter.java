@@ -1,9 +1,9 @@
 package ru.vtb.slepenkov.datamanager.converter;
 
 import ru.vtb.slepenkov.datamanager.model.SimpleUser;
-import ru.vtb.slepenkov.datamanager.model.UserWithDescription;
-import ru.vtb.slepenkov.datamanager.model.UserWithId;
-import ru.vtb.slepenkov.datamanager.model.base.User;
+import ru.vtb.slepenkov.datamanager.generated.dto.UserWithId;
+import ru.vtb.slepenkov.datamanager.generated.dto.UserWithDescription;
+import ru.vtb.slepenkov.datamanager.model.User;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,11 +20,11 @@ public class UserConverter {
         return modelMapper.map(user, UserWithId.class);
     }
 
-    public UserWithDescription toDTO( User user) {
+    public UserWithDescription toDTO(User user) {
         return modelMapper.map(user, UserWithDescription.class);
     }
 
-    public User from(SimpleUser user) {
+    public User from(UserWithDescription user) {
         return modelMapper.map(user, User.class);
     }
 }
