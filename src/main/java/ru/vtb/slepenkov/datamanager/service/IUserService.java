@@ -3,23 +3,22 @@ package ru.vtb.slepenkov.datamanager.service;
 
 import ru.vtb.slepenkov.datamanager.exceptions.ApiException;
 import ru.vtb.slepenkov.datamanager.exceptions.NotFoundException;
-import ru.vtb.slepenkov.datamanager.model.OrderBy;
-import ru.vtb.slepenkov.datamanager.model.SimpleUser;
-import ru.vtb.slepenkov.datamanager.model.UserWithDescription;
-import ru.vtb.slepenkov.datamanager.model.UserWithId;
+import ru.vtb.slepenkov.datamanager.generated.dto.OrderBy;
+import ru.vtb.slepenkov.datamanager.generated.dto.UserWithDescription;
+import ru.vtb.slepenkov.datamanager.generated.dto.UserWithId;
 import org.springframework.data.crossstore.ChangeSetPersister;
 
 import java.util.List;
 
 
 public interface IUserService {
-    List<UserWithId> list(OrderBy orderBy, Integer pageNumber, Integer numElements) throws ApiException;
+    List<UserWithId> list(OrderBy orderBy, Integer pageNumber, Integer numElements);
 
-    UserWithDescription create(SimpleUser user);
+    UserWithDescription create(UserWithDescription user);
 
-    UserWithDescription findById(Long id) throws ChangeSetPersister.NotFoundException;
+    UserWithDescription findById(Long id);
 
-    UserWithDescription update(Long id, SimpleUser user) throws ChangeSetPersister.NotFoundException;
+    UserWithDescription update(Long id, UserWithDescription user);
 
-    void delete(Long id) throws NotFoundException;
+    void delete(Long id);
 }

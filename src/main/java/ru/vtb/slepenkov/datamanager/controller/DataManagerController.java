@@ -12,18 +12,21 @@ import ru.vtb.slepenkov.datamanager.service.IUserService;
 
 import javax.validation.Valid;
 import java.awt.print.Pageable;
+import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class DataManagerController {
     private final IUserService service;
+    private final OrderBy defaultOrder = new OrderBy();
 
     @GetMapping("/users")
-    public List<UserWithId> list(Pageable pageable,
-                                 @RequestParam(name = "orderBy", required = false) OrderBy orderBy,
-                                 @RequestParam(name = "pageIndex", required = false) Integer pageIndex,
-                                 @RequestParam(name = "numElements", required = false) Integer numElements) {
+    public List<UserWithId> list(@RequestParam(name = "orderBy", required = false) OrderBy orderBy,
+                                 @RequestParam(name = "pageIndex", required = false, defaultValue ="0") Integer pageIndex,
+                                 @RequestParam(name = "numElements", required = false, defaultValue ="1" ) Integer numElements) {
+        orderBy = Objects.isNull(orderBy) ? defaultOrder : orderBy;
         return service.list(orderBy, pageIndex, numElements);
     }
 
@@ -33,17 +36,17 @@ public class DataManagerController {
     }
 
     @GetMapping("/user/{userId}")
-    public UserWithDescription findById(@RequestParam(name = "userId") Long id) {
+    public UserWithDescription findById(@PathVariable(name = "userId") Long id) {
         return service.findById(id);
     }
 
     @PutMapping("/user/{userId}")
-    public UserWithDescription update(@RequestParam(name = "userId") Long id, @Valid @RequestBody UserWithDescription user) {
+    public UserWithDescription update(@PathVariable(name = "userId") Long id, @Valid @RequestBody UserWithDescription user) {
         return service.update(id, user);
     }
 
     @DeleteMapping("/user/{userId}")
-    public ResponseEntity<Void> delete(@RequestParam(name = "userId") Long id) {
+    public ResponseEntity<Void> delete(@PathVariable(name = "userId") Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

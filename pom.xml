@@ -57,7 +57,7 @@
                             <language>spring</language>
                             <output>${project.build.directory}/generated-sources/</output>
                             <inputSpec>${project.basedir}/src/main/resources/api.yaml</inputSpec>
-                            <modelPackage>org.ru.vtb.slepenkov.datamanager.generated.dto</modelPackage>
+                            <modelPackage>ru.vtb.slepenkov.datamanager.generated.dto</modelPackage>
                             <generateApis>false</generateApis>
                             <generateSupportingFiles>false</generateSupportingFiles>
                         </configuration>
