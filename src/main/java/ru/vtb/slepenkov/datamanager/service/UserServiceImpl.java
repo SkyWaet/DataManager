@@ -1,6 +1,5 @@
 package ru.vtb.slepenkov.datamanager.service;
 
-import ru.vtb.slepenkov.datamanager.exceptions.ApiException;
 import ru.vtb.slepenkov.datamanager.exceptions.NoSuchColumnException;
 import ru.vtb.slepenkov.datamanager.exceptions.NotFoundException;
 import ru.vtb.slepenkov.datamanager.converter.UserConverter;
@@ -8,12 +7,11 @@ import ru.vtb.slepenkov.datamanager.model.OrderBy;
 import ru.vtb.slepenkov.datamanager.model.SimpleUser;
 import ru.vtb.slepenkov.datamanager.model.UserWithDescription;
 import ru.vtb.slepenkov.datamanager.model.UserWithId;
-import ru.vtb.slepenkov.datamanager.model.base.User;
+import ru.vtb.slepenkov.datamanager.model.User;
 import ru.vtb.slepenkov.datamanager.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -27,7 +25,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Getter
 @Slf4j
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
 
     private final UserRepository repository;
     private final UserConverter converter;

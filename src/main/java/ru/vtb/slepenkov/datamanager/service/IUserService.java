@@ -12,7 +12,7 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 import java.util.List;
 
 
-public interface UserService {
+public interface IUserService {
     List<UserWithId> list(OrderBy orderBy, Integer pageNumber, Integer numElements) throws ApiException;
 
     UserWithDescription create(SimpleUser user);
