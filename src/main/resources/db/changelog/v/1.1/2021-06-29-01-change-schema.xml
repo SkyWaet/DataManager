@@ -1,0 +1,30 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet author="gslepenkov" id="1">
+        <addColumn tableName="users">
+            <column remarks="Фамилия пользователя" name="surname" type="text"/>
+        </addColumn>
+        <addColumn tableName="users">
+            <column remarks="Имя пользователя" name="name" type="text"/>
+        </addColumn>
+        <addColumn tableName="users">
+            <column remarks="Отчество пользователя" name="patronymic" type="text"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="2" author="gslepenkov">
+        <modifyDataType tableName="users" columnName="login" newDataType="text"/>
+        <modifyDataType tableName="users" columnName="password" newDataType="text"/>
+        <modifyDataType tableName="users" columnName="email" newDataType="text"/>
+    </changeSet>
+
+    <changeSet id="3" author="gslepenkov">
+        <addColumn tableName="users">
+            <column remarks="Дата создания" name="date_created" type="timestamp"/>
+            <column remarks="Дата обновления" name="date_updated" type="timestamp"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>
