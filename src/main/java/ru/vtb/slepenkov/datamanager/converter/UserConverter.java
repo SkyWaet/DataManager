@@ -1,6 +1,5 @@
 package ru.vtb.slepenkov.datamanager.converter;
 
-import ru.vtb.slepenkov.datamanager.model.SimpleUser;
 import ru.vtb.slepenkov.datamanager.generated.dto.UserWithId;
 import ru.vtb.slepenkov.datamanager.generated.dto.UserWithDescription;
 import ru.vtb.slepenkov.datamanager.model.User;
