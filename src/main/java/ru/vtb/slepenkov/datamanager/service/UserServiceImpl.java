@@ -3,10 +3,9 @@ package ru.vtb.slepenkov.datamanager.service;
 import ru.vtb.slepenkov.datamanager.exceptions.NoSuchColumnException;
 import ru.vtb.slepenkov.datamanager.exceptions.NotFoundException;
 import ru.vtb.slepenkov.datamanager.converter.UserConverter;
-import ru.vtb.slepenkov.datamanager.model.OrderBy;
-import ru.vtb.slepenkov.datamanager.model.SimpleUser;
-import ru.vtb.slepenkov.datamanager.model.UserWithDescription;
-import ru.vtb.slepenkov.datamanager.model.UserWithId;
+import ru.vtb.slepenkov.datamanager.generated.dto.UserWithId;
+import ru.vtb.slepenkov.datamanager.generated.dto.UserWithDescription;
+import ru.vtb.slepenkov.datamanager.generated.dto.OrderBy;
 import ru.vtb.slepenkov.datamanager.model.User;
 import ru.vtb.slepenkov.datamanager.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -47,7 +46,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public UserWithDescription create(SimpleUser user) {
+    public UserWithDescription create(UserWithDescription user) {
         return converter.toDTO(repository.save(converter.from(user)));
     }
 
@@ -58,14 +57,13 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public UserWithDescription update(Long id, SimpleUser user) {
+    public UserWithDescription update(Long id, UserWithDescription user) {
         User oldUser = repository.findById(id).orElseThrow(
                 () -> new NotFoundException(404, "User with id " + id + " not found."));
-        oldUser.setLogin(user.getLogin());
-        oldUser.setPassword(user.getPassword());
-        oldUser.setEmail(user.getEmail());
-        oldUser.setDescription(user.getDescription());
-        return converter.toDTO(repository.save(oldUser));
+        user.setId(id);
+        User updatedUser = converter.from(user);
+        updatedUser.setCreatedAt(oldUser.getCreatedAt());
+        return converter.toDTO(repository.save(updatedUser));
     }
 
     @Override

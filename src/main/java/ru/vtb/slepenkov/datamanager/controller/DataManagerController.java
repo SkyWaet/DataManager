@@ -20,7 +20,7 @@ public class DataManagerController {
     private final IUserService service;
 
     @GetMapping("/users")
-    public Page<UserWithId> list(Pageable pageable,
+    public List<UserWithId> list(Pageable pageable,
                                  @RequestParam(name = "orderBy", required = false) OrderBy orderBy,
                                  @RequestParam(name = "pageIndex", required = false) Integer pageIndex,
                                  @RequestParam(name = "numElements", required = false) Integer numElements) {
