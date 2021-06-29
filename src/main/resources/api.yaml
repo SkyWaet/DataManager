@@ -16,6 +16,7 @@ components:
           type: integer
           format: int64
           minimum: 0
+          readOnly: true
         login:
           type: string
           minLength: 6
@@ -55,6 +56,7 @@ components:
           type: integer
           format: int64
           minimum: 0
+          readOnly: true
         login:
           type: string
           minLength: 6
