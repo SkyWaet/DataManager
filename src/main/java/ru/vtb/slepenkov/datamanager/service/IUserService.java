@@ -1,6 +1,7 @@
 package ru.vtb.slepenkov.datamanager.service;
 
 
+import org.springframework.data.domain.Page;
 import ru.vtb.slepenkov.datamanager.exceptions.ApiException;
 import ru.vtb.slepenkov.datamanager.exceptions.NotFoundException;
 import ru.vtb.slepenkov.datamanager.generated.dto.OrderBy;
@@ -12,7 +13,7 @@ import java.util.List;
 
 
 public interface IUserService {
-    List<UserWithId> list(OrderBy orderBy, Integer pageNumber, Integer numElements);
+    Page<UserWithId> list(OrderBy orderBy, Integer pageNumber, Integer numElements);
 
     UserWithDescription create(UserWithDescription user);
 

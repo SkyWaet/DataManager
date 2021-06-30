@@ -1,11 +1,13 @@
-package ru.vtb.slepenkov.datamanager.service;
+package ru.vtb.slepenkov.datamanager.service.impl;
 
+import org.springframework.data.domain.Page;
 import ru.vtb.slepenkov.datamanager.exceptions.NoSuchColumnException;
 import ru.vtb.slepenkov.datamanager.exceptions.NotFoundException;
 import ru.vtb.slepenkov.datamanager.converter.UserConverter;
 import ru.vtb.slepenkov.datamanager.generated.dto.UserWithId;
 import ru.vtb.slepenkov.datamanager.generated.dto.UserWithDescription;
 import ru.vtb.slepenkov.datamanager.generated.dto.OrderBy;
+import ru.vtb.slepenkov.datamanager.model.QUser;
 import ru.vtb.slepenkov.datamanager.model.User;
 import ru.vtb.slepenkov.datamanager.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -15,16 +17,18 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import ru.vtb.slepenkov.datamanager.service.AbstractBaseService;
+import ru.vtb.slepenkov.datamanager.service.IUserService;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 @Getter
 @Slf4j
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl extends AbstractBaseService<User, Long, QUser, UserRepository>
+        implements IUserService {
 
     private final UserRepository repository;
     private final UserConverter converter;
@@ -32,7 +36,7 @@ public class UserServiceImpl implements IUserService {
     private final String[] columnNames = {"id", "login", "password", "email", "description"};
 
     @Override
-    public List<UserWithId> list(OrderBy orderBy, Integer pageNumber, Integer numElements) {
+    public Page<UserWithId> list(OrderBy orderBy, Integer pageNumber, Integer numElements) {
         if (!Arrays.asList(columnNames).contains(orderBy.getColumn())) {
             throw new NoSuchColumnException(400, "There is no columns with name " + orderBy.getColumn());
         }
