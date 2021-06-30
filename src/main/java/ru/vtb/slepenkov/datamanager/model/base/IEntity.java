@@ -1,4 +1,4 @@
-package ru.vtb.slepenkov.datamanager.model;
+package ru.vtb.slepenkov.datamanager.model.base;
 
 import java.io.Serializable;
 

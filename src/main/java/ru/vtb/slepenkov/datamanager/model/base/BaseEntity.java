@@ -1,20 +1,20 @@
 package ru.vtb.slepenkov.datamanager.model.base;
 
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.querydsl.core.annotations.QueryEntity;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import ru.vtb.slepenkov.datamanager.model.IEntity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-@Getter
-@Setter
-@ToString
+@SuperBuilder
+@NoArgsConstructor
+@QueryEntity
+@Data
 public abstract class BaseEntity implements IEntity<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

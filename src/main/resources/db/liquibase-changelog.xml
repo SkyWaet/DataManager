@@ -6,4 +6,7 @@
     <include file="db/changelog/v/1.0/2021-06-24-02-fill-table.xml"/>
     <include file="db/changelog/v/1.1/2021-06-29-01-change-schema.xml"/>
     <include file="db/changelog/v/1.1/2021-06-29-02-fill-table.xml"/>
+    <include file="db/changelog/v/1.1/2021-06-30-01-add-is_deleted-column.xml"/>
+    <include file="db/changelog/v/1.1/2021-06-30-02-add-vacations.xml"/>
+    <include file="db/changelog/v/1.1/2021-06-30-03-rename-column.xml"/>
 </databaseChangeLog>
