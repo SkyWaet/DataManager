@@ -2,7 +2,6 @@ package ru.vtb.slepenkov.datamanager.controller;
 
 
 import lombok.AllArgsConstructor;
-import lombok.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +12,7 @@ import ru.vtb.slepenkov.datamanager.generated.dto.OrderBy;
 import ru.vtb.slepenkov.datamanager.service.IUserService;
 
 import javax.validation.Valid;
-import java.awt.print.Pageable;
-import java.util.List;
+
 import java.util.Objects;
 
 @RestController
@@ -23,7 +21,7 @@ import java.util.Objects;
 public class DataManagerController {
     private final IUserService service;
     private final UserConverter converter;
-    private final OrderBy defaultOrder;
+    private final OrderBy defaultOrder = new OrderBy();
 
     @GetMapping("/users")
     public Page<UserWithId> list(@RequestParam(name = "orderBy", required = false) OrderBy orderBy,

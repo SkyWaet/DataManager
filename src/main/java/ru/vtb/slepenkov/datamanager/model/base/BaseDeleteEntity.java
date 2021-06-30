@@ -13,6 +13,6 @@ import lombok.experimental.SuperBuilder;
 public class BaseDeleteEntity extends BaseEntity implements IDeleteEntity<Long> {
 
     @Column(name = "is_deleted")
-    private boolean isDeleted;
+    private boolean isDeleted=false;
 }
 
