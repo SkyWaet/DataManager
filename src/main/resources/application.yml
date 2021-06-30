@@ -1,0 +1,22 @@
+server:
+  port: 8080
+spring:
+  jackson:
+    date-format: ru.vtb.slepenkov.datamanager.RFC3339DateFormat
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/DataManager
+    username: postgres
+    password: root1234
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+    hibernate.ddl-auto: none
+    show-sql: true
+  liquibase:
+    change-log: classpath:/db/liquibase-changelog.xml
+
+logging:
+  level: info
