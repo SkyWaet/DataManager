@@ -18,7 +18,6 @@ import ru.vtb.slepenkov.datamanager.service.AbstractBaseService;
 import ru.vtb.slepenkov.datamanager.service.IUserService;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
