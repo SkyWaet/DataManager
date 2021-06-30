@@ -9,6 +9,34 @@ info:
     email: SkyWaet@gmail.com
 components:
   schemas:
+    UsersListResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserShortDTO'
+        pageable:
+          $ref: '../pageable/pageable.yml#/components/schemas/Pageable'
+        total_pages:
+          type: integer
+        total_elements:
+          type: integer
+        last:
+          type: boolean
+        first:
+          type: boolean
+        size:
+          type: integer
+        number_of_elements:
+          type: integer
+        number:
+          type: integer
+        sort:
+          $ref: '../pageable/pageable.yml#/components/schemas/Sort'
+        empty:
+          type: boolean
+
     UserShortDTO:
       type: object
       properties:
@@ -93,7 +121,8 @@ components:
         vacations:
           type: array
           items:
-            $ref: '#'#/components/schemas/VacationDTO'
+            $ref: '#/components/schemas/VacationDTO'
+          required: true
       required:
         - login
         - password
@@ -163,7 +192,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/userWithDescription'
+            $ref: '#/components/schemas/UserDTO'
           examples:
             john:
               $ref: '#/components/examples/JohnReq'
@@ -175,18 +204,6 @@ paths:
     get:
       summary: Gets list of users
       parameters:
-        - in: query
-          name: orderBy
-          schema:
-            type: object
-            properties:
-              column:
-                type: string
-                default: 'id'
-              ascendant:
-                type: boolean
-                default: true
-          description: allows to choose the ranking order
         - in: query
           name: pageIndex
           schema:
@@ -210,9 +227,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/userWithId'
+                $ref: '#/components/schemas/UsersListResponse'
               example:
                 - id: 0
                   login: John
@@ -233,7 +248,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/userWithDescription'
+                $ref: '#/components/schemas/UserDTO'
               examples:
                 john:
                   $ref: '#/components/examples/JohnRes'
@@ -262,7 +277,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/userWithDescription'
+                $ref: '#/components/schemas/UserDTO'
               examples:
                 john:
                   $ref: '#/components/examples/JohnRes'
@@ -283,7 +298,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/userWithDescription'
+                $ref: '#/components/schemas/UserDTO'
               examples:
                 john:
                   $ref: '#/components/examples/JohnRes'

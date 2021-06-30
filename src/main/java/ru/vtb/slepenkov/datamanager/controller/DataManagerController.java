@@ -3,10 +3,10 @@ package ru.vtb.slepenkov.datamanager.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.vtb.slepenkov.datamanager.converter.UserConverter;
-import ru.vtb.slepenkov.datamanager.generated.dto.OrderBy;
 import ru.vtb.slepenkov.datamanager.generated.dto.UserShortDTO;
 import ru.vtb.slepenkov.datamanager.generated.dto.UserDTO;
 import ru.vtb.slepenkov.datamanager.service.IUserService;
@@ -21,14 +21,10 @@ import java.util.Objects;
 public class DataManagerController {
     private final IUserService service;
     private final UserConverter converter;
-    private final OrderBy defaultOrder = new OrderBy();
 
     @GetMapping("/users")
-    public Page<UserShortDTO> list(@RequestParam(name = "orderBy", required = false) OrderBy orderBy,
-                                 @RequestParam(name = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
-                                 @RequestParam(name = "numElements", required = false, defaultValue = "1") Integer numElements) {
-        orderBy = Objects.isNull(orderBy) ? defaultOrder : orderBy;
-        return service.list(orderBy, pageIndex, numElements).map(converter::toShortDTO);
+    public Page<UserShortDTO> list(Pageable pageable) {
+        return service.list(pageable).map(converter::toShortDTO);
     }
 
     @PostMapping("/users")

@@ -1,5 +1,6 @@
 package ru.vtb.slepenkov.datamanager.service.impl;
 
+import com.querydsl.core.BooleanBuilder;
 import org.springframework.data.domain.Page;
 import ru.vtb.slepenkov.datamanager.exceptions.NoSuchColumnException;
 import ru.vtb.slepenkov.datamanager.exceptions.NotFoundException;
@@ -28,20 +29,11 @@ public class UserServiceImpl extends AbstractBaseService<User, Long, QUser, User
 
     private final UserRepository repository;
 
-    private final String[] columnNames = {"id", "login", "password", "email", "description"};
-
     @Override
-    public Page<User> list(OrderBy orderBy, Integer pageNumber, Integer numElements) {
-        if (!Arrays.asList(columnNames).contains(orderBy.getColumn())) {
-            throw new NoSuchColumnException(400, "There is no columns with name " + orderBy.getColumn());
-        }
-        Pageable page;
-        if (orderBy.isAscendant()) {
-            page = PageRequest.of(pageNumber, numElements, Sort.by(orderBy.getColumn()).ascending());
-        } else {
-            page = PageRequest.of(pageNumber, numElements, Sort.by(orderBy.getColumn()).descending());
-        }
-        return null;
+    public Page<User> list(Pageable pageable) {
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        booleanBuilder.and(QUser.user.deleted.isFalse());
+        return findAll(booleanBuilder, pageable);
     }
 
     @Override
@@ -51,13 +43,20 @@ public class UserServiceImpl extends AbstractBaseService<User, Long, QUser, User
 
     @Override
     public User findById(Long id) {
-        return get(id).orElseThrow(
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        booleanBuilder.and(QUser.user.deleted.isFalse());
+        booleanBuilder.and(QUser.user.id.eq(id));
+        return get(booleanBuilder).orElseThrow(
                 () -> new NotFoundException(404, "User with id " + id + " not found."));
     }
 
     @Override
     public User update(Long id, User user) {
-        User oldUser = get(id).orElseThrow(
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        booleanBuilder.and(QUser.user.deleted.isFalse());
+        booleanBuilder.and(QUser.user.id.eq(id));
+
+        User oldUser = get(booleanBuilder).orElseThrow(
                 () -> new NotFoundException(404, "User with id " + id + " not found."));
         user.setId(id);
         user.setCreatedAt(oldUser.getCreatedAt());
@@ -66,7 +65,11 @@ public class UserServiceImpl extends AbstractBaseService<User, Long, QUser, User
 
     @Override
     public void delete(Long id) throws NotFoundException {
-        User deletedUser = get(id).orElseThrow(
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        booleanBuilder.and(QUser.user.deleted.isFalse());
+        booleanBuilder.and(QUser.user.id.eq(id));
+
+        User deletedUser = get(booleanBuilder).orElseThrow(
                 () -> new NotFoundException(404, "User with id " + id + " not found."));
         deletedUser.setDeleted(true);
         save(deletedUser);
