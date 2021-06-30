@@ -10,11 +10,13 @@ spring:
     username: postgres
     password: root1234
     driver-class-name: org.postgresql.Driver
+
   jpa:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
     hibernate.ddl-auto: none
     show-sql: true
+    open-in-view: false
   liquibase:
     change-log: classpath:/db/liquibase-changelog.xml
 
