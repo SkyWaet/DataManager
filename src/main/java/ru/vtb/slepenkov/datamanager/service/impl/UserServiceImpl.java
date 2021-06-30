@@ -3,9 +3,6 @@ package ru.vtb.slepenkov.datamanager.service.impl;
 import org.springframework.data.domain.Page;
 import ru.vtb.slepenkov.datamanager.exceptions.NoSuchColumnException;
 import ru.vtb.slepenkov.datamanager.exceptions.NotFoundException;
-import ru.vtb.slepenkov.datamanager.converter.UserConverter;
-import ru.vtb.slepenkov.datamanager.generated.dto.UserWithId;
-import ru.vtb.slepenkov.datamanager.generated.dto.UserWithDescription;
 import ru.vtb.slepenkov.datamanager.generated.dto.OrderBy;
 import ru.vtb.slepenkov.datamanager.model.QUser;
 import ru.vtb.slepenkov.datamanager.model.User;
@@ -31,12 +28,11 @@ public class UserServiceImpl extends AbstractBaseService<User, Long, QUser, User
         implements IUserService {
 
     private final UserRepository repository;
-    private final UserConverter converter;
 
     private final String[] columnNames = {"id", "login", "password", "email", "description"};
 
     @Override
-    public Page<UserWithId> list(OrderBy orderBy, Integer pageNumber, Integer numElements) {
+    public Page<User> list(OrderBy orderBy, Integer pageNumber, Integer numElements) {
         if (!Arrays.asList(columnNames).contains(orderBy.getColumn())) {
             throw new NoSuchColumnException(400, "There is no columns with name " + orderBy.getColumn());
         }
@@ -46,37 +42,34 @@ public class UserServiceImpl extends AbstractBaseService<User, Long, QUser, User
         } else {
             page = PageRequest.of(pageNumber, numElements, Sort.by(orderBy.getColumn()).descending());
         }
-        return repository.findAll(page).stream().map(converter::toShortDTO).collect(Collectors.toList());
+        return null;
     }
 
     @Override
-    public UserWithDescription create(UserWithDescription user) {
-        return converter.toDTO(repository.save(converter.from(user)));
+    public User create(User user) {
+        return save(user);
     }
 
     @Override
-    public UserWithDescription findById(Long id) {
-        return converter.toDTO(repository.findById(id).orElseThrow(
-                () -> new NotFoundException(404, "User with id " + id + " not found.")));
+    public User findById(Long id) {
+        return get(id).orElseThrow(
+                () -> new NotFoundException(404, "User with id " + id + " not found."));
     }
 
     @Override
-    public UserWithDescription update(Long id, UserWithDescription user) {
-        User oldUser = repository.findById(id).orElseThrow(
+    public User update(Long id, User user) {
+        User oldUser = get(id).orElseThrow(
                 () -> new NotFoundException(404, "User with id " + id + " not found."));
         user.setId(id);
-        User updatedUser = converter.from(user);
-        updatedUser.setCreatedAt(oldUser.getCreatedAt());
-        return converter.toDTO(repository.save(updatedUser));
+        user.setCreatedAt(oldUser.getCreatedAt());
+        return save(user);
     }
 
     @Override
     public void delete(Long id) throws NotFoundException {
-        if (repository.existsById(id)) {
-            repository.deleteById(id);
-        } else {
-            throw new NotFoundException(404, "User with id " + id + " does not exist");
-        }
-
+        User deletedUser = get(id).orElseThrow(
+                () -> new NotFoundException(404, "User with id " + id + " not found."));
+        deletedUser.setDeleted(true);
+        save(deletedUser);
     }
 }

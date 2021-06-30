@@ -3,8 +3,10 @@ package ru.vtb.slepenkov.datamanager.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.vtb.slepenkov.datamanager.converter.UserConverter;
 import ru.vtb.slepenkov.datamanager.generated.dto.UserWithId;
 import ru.vtb.slepenkov.datamanager.generated.dto.UserWithDescription;
 import ru.vtb.slepenkov.datamanager.generated.dto.OrderBy;
@@ -20,29 +22,30 @@ import java.util.Objects;
 @AllArgsConstructor
 public class DataManagerController {
     private final IUserService service;
-    private final OrderBy defaultOrder = new OrderBy();
+    private final UserConverter converter;
+    private final OrderBy defaultOrder;
 
     @GetMapping("/users")
-    public List<UserWithId> list(@RequestParam(name = "orderBy", required = false) OrderBy orderBy,
-                                 @RequestParam(name = "pageIndex", required = false, defaultValue ="0") Integer pageIndex,
-                                 @RequestParam(name = "numElements", required = false, defaultValue ="1" ) Integer numElements) {
+    public Page<UserWithId> list(@RequestParam(name = "orderBy", required = false) OrderBy orderBy,
+                                 @RequestParam(name = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
+                                 @RequestParam(name = "numElements", required = false, defaultValue = "1") Integer numElements) {
         orderBy = Objects.isNull(orderBy) ? defaultOrder : orderBy;
-        return service.list(orderBy, pageIndex, numElements);
+        return service.list(orderBy, pageIndex, numElements).map(converter::toShortDTO);
     }
 
     @PostMapping("/users")
     public UserWithDescription create(@Valid @RequestBody UserWithDescription user) {
-        return service.create(user);
+        return converter.toDTO(service.create(converter.from(user)));
     }
 
     @GetMapping("/user/{userId}")
     public UserWithDescription findById(@PathVariable(name = "userId") Long id) {
-        return service.findById(id);
+        return converter.toDTO(service.findById(id));
     }
 
     @PutMapping("/user/{userId}")
     public UserWithDescription update(@PathVariable(name = "userId") Long id, @Valid @RequestBody UserWithDescription user) {
-        return service.update(id, user);
+        return converter.toDTO(service.update(id, converter.from(user)));
     }
 
     @DeleteMapping("/user/{userId}")
@@ -50,5 +53,4 @@ public class DataManagerController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
-
 }
