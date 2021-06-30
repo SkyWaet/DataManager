@@ -2,13 +2,9 @@
 <databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
-    <include file="db/changelog/v/1.0/2021-06-24-01-init-schema.xml"/>
-    <include file="db/changelog/v/1.0/2021-06-24-02-fill-table.xml"/>
-    <include file="db/changelog/v/1.1/2021-06-29-01-change-schema.xml"/>
-    <include file="db/changelog/v/1.1/2021-06-29-02-fill-table.xml"/>
-    <include file="db/changelog/v/1.1/2021-06-30-01-add-is_deleted-column.xml"/>
-    <include file="db/changelog/v/1.1/2021-06-30-02-add-vacations.xml"/>
-    <include file="db/changelog/v/1.1/2021-06-30-03-rename-column.xml"/>
-    <include file="db/changelog/v/1.1/2021-06-30-04-correct-column-name.xml"/>
-    <include file="db/changelog/v/1.1/2021-06-30-05-add-columns-to-vacations.xml"/>
+    <include file="db/changelog/v/1.0/2021-06-30-01-init-users-table.xml"/>
+    <include file="db/changelog/v/1.0/2021-06-30-02-fill-users-table.xml"/>
+    <include file="db/changelog/v/1.1/2021-06-30-01-add-column.xml"/>
+    <include file="db/changelog/v/1.1/2021-06-30-02-init-vacations.xml"/>
+    <include file="db/changelog/v/1.1/2021-06-30-03-fill-vacations.xml"/>
 </databaseChangeLog>

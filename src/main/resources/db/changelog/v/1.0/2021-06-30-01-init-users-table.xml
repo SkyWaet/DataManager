@@ -8,14 +8,20 @@
             <column remarks="ID автоинкремент" autoIncrement="true" name="id" type="bigint">
                 <constraints primaryKey="true"/>
             </column>
-            <column remarks="Логин пользователя" name="login" type="character varying">
+            <column remarks="Логин пользователя" name="login" type="text">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column remarks="Пароль пользователя" name="password" type="character varying">
+            <column remarks="Пароль пользователя" name="password" type="text">
                 <constraints nullable="false"/>
             </column>
-            <column remarks="Email пользователя" name="email" type="character varying"/>
+            <column remarks="Фамилия пользователя" name="surname" type="text"/>
+            <column remarks="Имя пользователя" name="name" type="text"/>
+            <column remarks="Отчество пользователя" name="patronymic" type="text"/>
+            <column remarks="Email пользователя" name="email" type="text"/>
             <column remarks="Описание пользователя" name="description" type="text"/>
+            <column remarks="Дата создания" name="date_created" type="timestamp"
+                    defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column remarks="Дата обновления" name="date_updated" type="timestamp"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

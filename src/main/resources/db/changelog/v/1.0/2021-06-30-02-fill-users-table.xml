@@ -8,6 +8,9 @@
             <column name="id" valueNumeric="1"/>
             <column name="login" value="JohnJohn"/>
             <column name="password" value="JohnPass123"/>
+            <column name="surname" value="Johnson"/>
+            <column name="name" value="John"/>
+            <column name="patronymic" value="James"/>
             <column name="email" value="null"/>
             <column name="description" value="null"/>
         </insert>
@@ -15,6 +18,9 @@
             <column name="id" valueNumeric="2"/>
             <column name="login" value="JohnMary"/>
             <column name="password" value="JohnMary123"/>
+            <column name="surname" value="Jameson"/>
+            <column name="name" value="James"/>
+            <column name="patronymic" value="John"/>
             <column name="email" value="john@mail.com"/>
             <column name="description" value="null"/>
         </insert>
@@ -22,6 +28,9 @@
             <column name="id" valueNumeric="3"/>
             <column name="login" value="MaryMary"/>
             <column name="password" value="MaryPass123"/>
+            <column name="surname" value="Johnson"/>
+            <column name="name" value="Mary"/>
+            <column name="patronymic" value="Jane"/>
             <column name="email" value="null"/>
             <column name="description" value="I love coding"/>
         </insert>
@@ -29,6 +38,9 @@
             <column name="id" valueNumeric="4"/>
             <column name="login" value="MaryJohn"/>
             <column name="password" value="MaryPass123"/>
+            <column name="surname" value="Jameson"/>
+            <column name="name" value="Jane"/>
+            <column name="patronymic" value="Mary"/>
             <column name="email" value="mary@gmail.com"/>
             <column name="description" value="null"/>
         </insert>
@@ -36,6 +48,9 @@
             <column name="id" valueNumeric="5"/>
             <column name="login" value="MaryJohnMary"/>
             <column name="password" value="marypass1234"/>
+            <column name="surname" value="Jacobson"/>
+            <column name="name" value="Mary"/>
+            <column name="patronymic" value="Jane"/>
             <column name="email" value="maryJ@mail.ru"/>
             <column name="description" value="I love coding"/>
         </insert>

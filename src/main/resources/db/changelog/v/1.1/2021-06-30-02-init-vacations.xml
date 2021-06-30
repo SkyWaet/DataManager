@@ -7,9 +7,12 @@
             <column remarks="ID автоинкремент" autoIncrement="true" name="id" type="bigint">
                 <constraints primaryKey="true"/>
             </column>
-            <column remarks="Дата начала отпуска" name="from" type="timestamp"/>
-            <column remarks="Дата окончания отпуска" name="password" type="timestamp"/>
+            <column remarks="Дата начала отпуска" name="from" type="date"/>
+            <column remarks="Дата окончания отпуска" name="to" type="date"/>
             <column remarks="Внешний ключ с таблицей пользователей" name="user_id" type="bigint"/>
+            <column remarks="Дата создания" name="date_created" type="timestamp"
+                    defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column remarks="Дата обновления" name="date_updated" type="timestamp"/>
         </createTable>
         <addForeignKeyConstraint
                 baseTableName="vacations"

@@ -4,6 +4,8 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 
     <changeSet id="1" author="gslepenkov">
-        <renameColumn tableName="vacations" oldColumnName="password" newColumnName="to"/>
+        <addColumn tableName="users">
+            <column remarks="Флаг удаления" name="is_deleted" type="boolean" defaultValue="false"/>
+        </addColumn>
     </changeSet>
 </databaseChangeLog>
