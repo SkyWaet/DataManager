@@ -137,10 +137,10 @@ components:
           readOnly: true
         from:
           type: string
-          format: date-time
+          format: date
         to:
           type: string
-          format: date-time
+          format: date
 
 
   examples:
