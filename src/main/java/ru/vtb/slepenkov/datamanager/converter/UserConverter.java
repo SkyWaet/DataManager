@@ -23,7 +23,9 @@ public class UserConverter {
         return modelMapper.map(user, UserDTO.class);
     }
 
-    public User from(UserDTO user) {
-        return modelMapper.map(user, User.class);
+    public User from(UserDTO userDTO) {
+        User userEntity = modelMapper.map(userDTO, User.class);
+        userEntity.getVacationsList().forEach(vacation -> vacation.setUser(userEntity));
+        return userEntity;
     }
 }

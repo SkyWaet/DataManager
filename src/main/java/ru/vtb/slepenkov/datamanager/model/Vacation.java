@@ -6,26 +6,23 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import ru.vtb.slepenkov.datamanager.model.base.BaseEntity;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
 @Table(name = "vacations")
-@javax.persistence.Entity
+@Entity
 @Data
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Vacation extends BaseEntity {
 
-    @Column(name = "from")
+    @Column(name = "date_from")
     private LocalDate from;
 
-    @Column(name = "to")
+    @Column(name = "date_to")
     private LocalDate to;
 
     @ManyToOne
