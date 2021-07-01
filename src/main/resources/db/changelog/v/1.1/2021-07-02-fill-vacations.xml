@@ -6,26 +6,26 @@
     <changeSet author="gslepenkov" id="1" >
         <insert tableName="vacations">
             <column name="id" valueNumeric="1"/>
-            <column name="from" valueDate="2020-06-30"/>
-            <column name="to" valueDate="2020-07-30"/>
+            <column name="date_from" valueDate="2020-06-30"/>
+            <column name="date_to" valueDate="2020-07-30"/>
             <column name="user_id" valueNumeric="1"/>
         </insert>
         <insert tableName="vacations">
             <column name="id" valueNumeric="2"/>
-            <column name="from" valueDate="2021-06-30"/>
-            <column name="to" valueDate="2021-07-30"/>
+            <column name="date_from" valueDate="2021-06-30"/>
+            <column name="date_to" valueDate="2021-07-30"/>
             <column name="user_id" valueNumeric="1"/>
         </insert>
         <insert tableName="vacations">
             <column name="id" valueNumeric="3"/>
-            <column name="from" valueDate="2020-06-05"/>
-            <column name="to" valueDate="2020-06-30"/>
+            <column name="date_from" valueDate="2020-06-05"/>
+            <column name="date_to" valueDate="2020-06-30"/>
             <column name="user_id" valueNumeric="3"/>
         </insert>
         <insert tableName="vacations">
             <column name="id" valueNumeric="4"/>
-            <column name="from" valueDate="2020-06-30"/>
-            <column name="to" valueDate="2020-07-30"/>
+            <column name="date_from" valueDate="2020-06-30"/>
+            <column name="date_to" valueDate="2020-07-30"/>
             <column name="user_id" valueNumeric="4"/>
         </insert>
     </changeSet>

@@ -61,7 +61,11 @@
                             <modelPackage>ru.vtb.slepenkov.datamanager.generated.dto</modelPackage>
                             <generateApis>false</generateApis>
                             <generateSupportingFiles>false</generateSupportingFiles>
+                            <configOptions>
+                                <dateLibrary>java8-localdatetime</dateLibrary>
+                            </configOptions>
                         </configuration>
+
                     </execution>
                 </executions>
             </plugin>
