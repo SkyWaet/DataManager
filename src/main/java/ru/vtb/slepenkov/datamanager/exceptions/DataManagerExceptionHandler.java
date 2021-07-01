@@ -1,28 +1,29 @@
 package ru.vtb.slepenkov.datamanager.exceptions;
 
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @Slf4j
 @RestControllerAdvice
-public class ApiExceptionHandler {
+public class DataManagerExceptionHandler {
 
-    @ResponseBody
-    @ExceptionHandler(NotFoundException.class)
+    @ExceptionHandler({UserNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String userNotFoundHandler(NotFoundException ex) {
+    @ResponseBody
+    public String handleUserNotFoundException(UserNotFoundException ex){
+        log.error("User not found exception: ", ex);
         return ex.getMessage();
     }
 
-    @ResponseBody
-    @ExceptionHandler(NoSuchColumnException.class)
+    @ExceptionHandler({NullVacationsListException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    String NoSuchColumnHandler(NoSuchColumnException ex) {
+    @ResponseBody
+    public String handleUserNotFoundException(NullVacationsListException ex){
+        log.error("Empty vacations list: ", ex);
         return ex.getMessage();
     }
 }

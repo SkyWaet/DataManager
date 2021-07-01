@@ -1,5 +1,6 @@
 package ru.vtb.slepenkov.datamanager.converter;
 
+import ru.vtb.slepenkov.datamanager.exceptions.NullVacationsListException;
 import ru.vtb.slepenkov.datamanager.generated.dto.UserDTO;
 import ru.vtb.slepenkov.datamanager.generated.dto.UserShortDTO;
 import ru.vtb.slepenkov.datamanager.model.User;
@@ -7,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
+import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
@@ -25,7 +28,11 @@ public class UserConverter {
 
     public User from(UserDTO userDTO) {
         User userEntity = modelMapper.map(userDTO, User.class);
-        userEntity.getVacationsList().forEach(vacation -> vacation.setUser(userEntity));
+        var vacationsList = userEntity.getVacationsList();
+        if(Objects.isNull(vacationsList)){
+            throw new NullVacationsListException();
+        }
+        vacationsList.forEach(vacation -> vacation.setUser(userEntity));
         return userEntity;
     }
 }
