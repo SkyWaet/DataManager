@@ -31,20 +31,20 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text"
+								"type": "text",
+								"disabled": true
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/SkyWaet/DataManager/1.0.0/users",
+							"raw": "http://localhost:8080/api/v1/users",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"SkyWaet",
-								"DataManager",
-								"1.0.0",
+								"api",
+								"v1",
 								"users"
 							]
 						}
@@ -76,12 +76,13 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text"
+								"type": "text",
+								"disabled": true
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"login\": \"GlebBelg1234\",\r\n    \"password\": \"Gleb1234\",\r\n    \"email\": \"gleb@mail.ru\"  \r\n}",
+							"raw": "{\r\n    \"login\": \"BorisIvanov123\",\r\n    \"password\": \"Boris23456\",\r\n    \"surname\": \"Ivanov\",\r\n    \"name\": \"Boris\",\r\n    \"patronymic\": \"Ivanovich\",\r\n    \"email\": \"Boris@mail.ru\",\r\n    \"vacations\": []\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -89,16 +90,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/SkyWaet/DataManager/1.0.0/users",
+							"raw": "http://localhost:8080/api/v1/users",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"SkyWaet",
-								"DataManager",
-								"1.0.0",
+								"api",
+								"v1",
 								"users"
 							]
 						}
@@ -135,16 +135,15 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/SkyWaet/DataManager/1.0.0/user/{{userId}}",
+							"raw": "http://localhost:8080/api/v1/user/{{userId}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"SkyWaet",
-								"DataManager",
-								"1.0.0",
+								"api",
+								"v1",
 								"user",
 								"{{userId}}"
 							]
@@ -184,7 +183,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"login\": \"GlebBelg1435\",\r\n    \"password\": \"Gleb123456\",\r\n    \"description\": \"Hello, I am Gleb\"\r\n}",
+							"raw": "{\r\n    \"login\": \"BorisIvanov123\",\r\n    \"password\": \"Boris23456\",\r\n    \"surname\": \"Ivanov\",\r\n    \"name\": \"Boris\",\r\n    \"patronymic\": \"Ivanovich\",\r\n    \"description\": \"I love my job!\",\r\n    \"vacations\": [] \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -192,16 +191,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/SkyWaet/DataManager/1.0.0/user/{{userId}}",
+							"raw": "http://localhost:8080/api/v1/user/{{userId}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"SkyWaet",
-								"DataManager",
-								"1.0.0",
+								"api",
+								"v1",
 								"user",
 								"{{userId}}"
 							]
@@ -234,16 +232,15 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/SkyWaet/DataManager/1.0.0/user/{{userId}}",
+							"raw": "http://localhost:8080/api/v1/user/{{userId}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"SkyWaet",
-								"DataManager",
-								"1.0.0",
+								"api",
+								"v1",
 								"user",
 								"{{userId}}"
 							]
@@ -276,17 +273,15 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/SkyWaet/DataManager/1.0.0/user/{{userId}}",
+							"raw": "http://localhost:8080/api/v1/{{userId}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"SkyWaet",
-								"DataManager",
-								"1.0.0",
-								"user",
+								"api",
+								"v1",
 								"{{userId}}"
 							]
 						}
@@ -323,16 +318,15 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/SkyWaet/DataManager/1.0.0/users",
+							"raw": "http://localhost:8080/api/v1/users",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"SkyWaet",
-								"DataManager",
-								"1.0.0",
+								"api",
+								"v1",
 								"users"
 							]
 						}
@@ -369,16 +363,15 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/SkyWaet/DataManager/1.0.0/user/0",
+							"raw": "http://localhost:8080/api/v1/user/0",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"SkyWaet",
-								"DataManager",
-								"1.0.0",
+								"api",
+								"v1",
 								"user",
 								"0"
 							]
@@ -412,7 +405,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"login\": \"GlebBelg1435\",\r\n    \"password\": \"Gleb123456\",\r\n    \"description\": \"Hello, I am Gleb\"\r\n}",
+							"raw": "{\r\n    \"login\": \"GlebBelg1435\",\r\n    \"password\": \"Gleb123456\",\r\n    \"description\": \"Hello, I am Gleb\",\r\n    \"vacations\": []\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -420,16 +413,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/SkyWaet/DataManager/1.0.0/user/0",
+							"raw": "http://localhost:8080/api/v1/user/0",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"SkyWaet",
-								"DataManager",
-								"1.0.0",
+								"api",
+								"v1",
 								"user",
 								"0"
 							]
@@ -462,18 +454,202 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/SkyWaet/DataManager/1.0.0/user/0",
+							"raw": "http://localhost:8080/api/v1/user/0",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"SkyWaet",
-								"DataManager",
-								"1.0.0",
+								"api",
+								"v1",
 								"user",
 								"0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "VacationsTest",
+			"item": [
+				{
+					"name": "GetUserWithId1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);    \r",
+									"});\r",
+									"pm.test(\"Vacations list is not empty\", function(){\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.vacations).not.to.be.empty;\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all vacations for first users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Vacations list was successfully updated\", function(){\r",
+									"    var jsonBody = pm.response.json();\r",
+									"    pm.expect(jsonBody.vacations).to.be.empty;\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"JohnJohn\",\r\n    \"password\": \"JohnPass123\",\r\n    \"vacations\": [ ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add vacations to first user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Vacations list is not empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.environment.set(\"vacations\",jsonData.vacations);\r",
+									"    pm.expect(jsonData.vacations).not.to.be.empty;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"JohnJohn\",\r\n    \"password\": \"JohnPass123\",\r\n    \"vacations\": [\r\n        {\r\n            \"from\": \"2020-05-11\",\r\n            \"to\": \"2020-06-01\"\r\n        },\r\n        {\r\n            \"from\": \"2019-05-11\",\r\n            \"to\": \"2019-06-01\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shorten vacations list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Vacation list changed\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var oldVacations = pm.environment.get(\"vacations\");\r",
+									"    pm.expect(jsonData.value).not.to.eql(oldVacations);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"login\": \"JohnJohn\",\r\n    \"password\": \"JohnPass123\",\r\n    \"vacations\": [\r\n        {\r\n            \"from\": \"2021-06-11\",\r\n            \"to\": \"2021-07-01\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"1"
 							]
 						}
 					},
