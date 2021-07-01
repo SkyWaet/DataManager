@@ -2,9 +2,8 @@ server:
   port: 8080
 spring:
   jackson:
-    date-format: ru.vtb.slepenkov.datamanager.RFC3339DateFormat
-    serialization:
-      WRITE_DATES_AS_TIMESTAMPS: false
+     property-naming-strategy: SNAKE_CASE
+     default-property-inclusion: non_null
   datasource:
     url: jdbc:postgresql://localhost:5432/DataManager
     username: postgres
@@ -14,7 +13,11 @@ spring:
   jpa:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
-    hibernate.ddl-auto: none
+    properties:
+      hibernate:
+        types:
+          print:
+            banner: false
     show-sql: true
     open-in-view: false
   liquibase:

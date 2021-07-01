@@ -10,7 +10,6 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 
 @SpringBootApplication
 @EnableOpenApi
-@ComponentScan(basePackages = { "ru.vtb.slepenkov.datamanager", "ru.vtb.slepenkov.datamanager.api" , "ru.vtb.slepenkov.datamanager.configuration"})
 public class Swagger2SpringBoot implements CommandLineRunner {
 
     @Override
