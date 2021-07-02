@@ -2,9 +2,9 @@
 <databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
-    <include file="db/changelog/v/1.0/2021-06-30-01-init-users-table.xml"/>
-    <include file="db/changelog/v/1.0/2021-06-30-02-fill-users-table.xml"/>
-    <include file="db/changelog/v/1.1/2021-06-30-01-add-column.xml"/>
-    <include file="db/changelog/v/1.1/2021-07-01-init-vacations.xml"/>
-    <include file="db/changelog/v/1.1/2021-07-02-fill-vacations.xml"/>
+    <include file="db/changelog/v/1.0/2021-07-01-01-init-users-table.xml"/>
+    <include file="db/changelog/v/1.0/2021-07-01-02-fill-users-table.xml"/>
+    <include file="db/changelog/v/1.1/2021-07-01-03-add-column.xml"/>
+    <include file="db/changelog/v/1.1/2021-07-01-04-init-vacations-table.xml"/>
+    <include file="db/changelog/v/1.1/2021-07-01-05-fill-vacations-table.xml"/>
 </databaseChangeLog>

@@ -5,7 +5,7 @@
 
     <changeSet author="gslepenkov" id="1">
         <createTable remarks="Таблица пользователей" tableName="users">
-            <column remarks="ID автоинкремент" autoIncrement="true" name="id" type="bigint">
+            <column remarks="ID автоинкремент" autoIncrement="true" name="id" type="bigserial">
                 <constraints primaryKey="true"/>
             </column>
             <column remarks="Логин пользователя" name="login" type="text">

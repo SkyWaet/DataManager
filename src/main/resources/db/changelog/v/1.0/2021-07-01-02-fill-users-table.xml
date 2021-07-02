@@ -5,7 +5,6 @@
 
     <changeSet author="gslepenkov" id="1" >
         <insert tableName="users">
-            <column name="id" valueNumeric="1"/>
             <column name="login" value="JohnJohn"/>
             <column name="password" value="JohnPass123"/>
             <column name="surname" value="Johnson"/>
@@ -15,7 +14,6 @@
             <column name="description" value="null"/>
         </insert>
         <insert tableName="users">
-            <column name="id" valueNumeric="2"/>
             <column name="login" value="JohnMary"/>
             <column name="password" value="JohnMary123"/>
             <column name="surname" value="Jameson"/>
@@ -25,7 +23,6 @@
             <column name="description" value="null"/>
         </insert>
         <insert tableName="users">
-            <column name="id" valueNumeric="3"/>
             <column name="login" value="MaryMary"/>
             <column name="password" value="MaryPass123"/>
             <column name="surname" value="Johnson"/>
@@ -35,7 +32,6 @@
             <column name="description" value="I love coding"/>
         </insert>
         <insert tableName="users">
-            <column name="id" valueNumeric="4"/>
             <column name="login" value="MaryJohn"/>
             <column name="password" value="MaryPass123"/>
             <column name="surname" value="Jameson"/>
@@ -45,7 +41,6 @@
             <column name="description" value="null"/>
         </insert>
         <insert tableName="users">
-            <column name="id" valueNumeric="5"/>
             <column name="login" value="MaryJohnMary"/>
             <column name="password" value="marypass1234"/>
             <column name="surname" value="Jacobson"/>
