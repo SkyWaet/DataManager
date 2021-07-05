@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.vtb.slepenkov.datamanager.exceptions.UserNotFoundException;
@@ -58,22 +60,27 @@ public class UserServiceTest extends TestCase {
         return vacations;
     }
 
-    private List<Long> fillUsersTable(int numOfRecords) {
-        List<Long> idOfCreatedUsers = new ArrayList<>();
-        for (int i = 0; i < numOfRecords; i++) {
-            idOfCreatedUsers.add(repository.save(defaultUser(i)).getId());
-        }
-        return idOfCreatedUsers;
-    }
-
-    private void clearDatabase(List<Long> idOfCreatedUsers) {
-        for (var elem : idOfCreatedUsers) {
-            repository.deleteById(elem);
+    @Test
+    public void getFirstPageOfUsersTest() {
+        List<User> arrayOfUsers = new ArrayList<>();
+        try {
+            for (int i = 0; i < 40; i++) {
+                User current = defaultUser(i);
+                arrayOfUsers.add(current);
+                userService.create(current);
+            }
+            Page<User> firstPage = userService.list(PageRequest.of(0, 10));
+            assertThat(firstPage.getSize()).isEqualTo(10);
+            assertThat(firstPage.getNumber()).isEqualTo(0);
+        } finally {
+            for (var user : arrayOfUsers) {
+                repository.deleteById(user.getId());
+            }
         }
     }
 
     @Test
-    public void findByIdTestOk() {
+    public void findByCorrectIdTest() {
         User newUser = userService.create(defaultUser(1));
         Long fromDB = userService.findById(newUser.getId()).getId();
         repository.deleteById(fromDB);
@@ -87,7 +94,6 @@ public class UserServiceTest extends TestCase {
 
     @Test
     public void updateUserByIdTest() {
-
         User newUser = userService.create(defaultUser(1));
         String description = "Hello";
         newUser.setDescription(description);
@@ -108,7 +114,6 @@ public class UserServiceTest extends TestCase {
         List<Vacation> vacations = userService.update(newUser.getId(), newUser).getVacationsList();
         repository.deleteById(newUser.getId());
         assertThat(vacations.size()).isGreaterThan(0);
-        //Assert.assertEquals(true, updatedUser.getVacationsList().size() > 0);
     }
 
     @Test
