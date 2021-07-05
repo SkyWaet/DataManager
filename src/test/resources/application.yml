@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/DataManagerTest
+    username: postgres
+    password: root1234
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+    properties:
+      hibernate:
+        types:
+          print:
+            banner: false
+    show-sql: true
+    open-in-view: false
+  liquibase:
+    change-log: classpath:/db/liquibase-changelog.xml
