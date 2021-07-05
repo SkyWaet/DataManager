@@ -656,6 +656,20 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Paging tests",
+			"item": [
+				{
+					"name": "Get first page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
