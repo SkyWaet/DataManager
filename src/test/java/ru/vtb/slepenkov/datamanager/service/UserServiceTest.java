@@ -127,7 +127,19 @@ public class UserServiceTest extends TestCase {
         userService.update(0L, defaultUser(1));
     }
 
-        
+    @Test
+    public void deleteUserByIdLogicallyTest() {
+        User newUser = userService.create(defaultUser(1));
+        Long id = newUser.getId();
+        try {
+            userService.delete(id);
+            assertThat(repository.existsById(id)).isTrue();
+            Assert.assertThrows(UserNotFoundException.class, () -> userService.findById(id));
+        } finally {
+            repository.deleteById(id);
+        }
+    }
+
 
     @Test(expected = UserNotFoundException.class)
     public void deleteByNonExistentIdTest() {
