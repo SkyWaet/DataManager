@@ -5,7 +5,7 @@ spring:
      property-naming-strategy: SNAKE_CASE
      default-property-inclusion: non_null
   datasource:
-    url: jdbc:postgresql://localhost:5432/DataManager
+    url: jdbc:postgresql://dm_postgres:5432/DataManager
     username: postgres
     password: root1234
     driver-class-name: org.postgresql.Driver

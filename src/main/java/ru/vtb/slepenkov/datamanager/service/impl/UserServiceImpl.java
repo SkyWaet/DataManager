@@ -46,25 +46,15 @@ public class UserServiceImpl extends AbstractBaseService<User, Long, QUser, User
 
     @Override
     public User update(Long id, User user) {
-        BooleanBuilder booleanBuilder = new BooleanBuilder();
-        booleanBuilder.and(QUser.user.deleted.isFalse());
-        booleanBuilder.and(QUser.user.id.eq(id));
-
-        User oldUser = get(booleanBuilder).orElseThrow(
-                () -> new UserNotFoundException(id));
+        User oldUser = findById(id);
         user.setId(id);
         user.setCreatedAt(oldUser.getCreatedAt());
         return save(user);
     }
 
     @Override
-    public void delete(Long id) throws UserNotFoundException {
-        BooleanBuilder booleanBuilder = new BooleanBuilder();
-        booleanBuilder.and(QUser.user.deleted.isFalse());
-        booleanBuilder.and(QUser.user.id.eq(id));
-
-        User deletedUser = get(booleanBuilder).orElseThrow(
-                () -> new UserNotFoundException(id));
+    public void delete(Long id) {
+        User deletedUser = findById(id);
         deletedUser.setDeleted(true);
         save(deletedUser);
     }

@@ -7,13 +7,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.vtb.slepenkov.datamanager.converter.UserConverter;
-import ru.vtb.slepenkov.datamanager.generated.dto.UserShortDTO;
 import ru.vtb.slepenkov.datamanager.generated.dto.UserDTO;
+import ru.vtb.slepenkov.datamanager.generated.dto.UserShortDTO;
 import ru.vtb.slepenkov.datamanager.service.IUserService;
 
 import javax.validation.Valid;
-
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1")

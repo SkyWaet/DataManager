@@ -1,0 +1,28 @@
+version: "3"
+
+networks:
+  dm:
+
+services:
+  datamanager:
+    image: datamanager:1.0.1
+    container_name: datamanager_main
+    ports:
+      - "18080:8080"
+    depends_on:
+      - db
+    networks:
+      - dm
+
+  db:
+    image: postgres
+    container_name: dm_postgres
+    ports:
+      - "8000:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root1234
+      POSTGRES_DB: DataManager
+    restart: always
+    networks:
+      - dm

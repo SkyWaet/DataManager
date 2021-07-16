@@ -38,4 +38,13 @@ public class User extends BaseDeleteNamedEntity {
     @OrderBy(value = "id")
     private List<Vacation> vacationsList;
 
+    public void setVacationsList(List<Vacation> list) {
+        vacationsList = Objects.isNull(list) ? new ArrayList<Vacation>() : list;
+    }
+
+    public List<Vacation> getVacationsList() {
+        return vacationsList;
+    }
+
+
 }

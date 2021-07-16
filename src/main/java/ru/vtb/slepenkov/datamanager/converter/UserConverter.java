@@ -1,13 +1,13 @@
 package ru.vtb.slepenkov.datamanager.converter;
 
-import ru.vtb.slepenkov.datamanager.exceptions.NullVacationsListException;
-import ru.vtb.slepenkov.datamanager.generated.dto.UserDTO;
-import ru.vtb.slepenkov.datamanager.generated.dto.UserShortDTO;
-import ru.vtb.slepenkov.datamanager.model.User;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import ru.vtb.slepenkov.datamanager.exceptions.NullVacationsListException;
+import ru.vtb.slepenkov.datamanager.generated.dto.UserDTO;
+import ru.vtb.slepenkov.datamanager.generated.dto.UserShortDTO;
+import ru.vtb.slepenkov.datamanager.model.User;
 
 import java.util.Objects;
 
